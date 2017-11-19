@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="classes">
+    <parameter name="appURL" value="http://automationpractice.com/index.php?controller=contact"/>
+    <parameter name="browserType" value="chrome"/>
+    <test verbose="2" preserve-order="true" name="webdriver">
+        <classes>
+            <class name="examples.Api">
+                <methods>
+                    <include name="apiTest"/>
+                </methods>
+            </class>
+            <class name="examples.Form">
+                <methods>
+                    <include name="formTest"/>
+                </methods>
+            </class>
+            <class name="examples.Images">
+                <methods>
+                    <include name="imageTest"/>
+                </methods>
+            </class>
+            <class name="examples.Links">
+                <methods>
+                    <include name="linksTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

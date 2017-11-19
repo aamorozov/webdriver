@@ -1,0 +1,80 @@
+import java.util.concurrent.TimeUnit
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+ext.seleniumVersion = '3.7.0'
+ext.log4jVersion = '2.9.0'
+
+compileTestJava {
+    sourceCompatibility = 1.9
+    targetCompatibility = 1.9
+    options.compilerArgs += '-parameters'
+}
+
+test.dependsOn 'cleanTest'
+
+dependencies {
+    testCompile group: 'org.testng', name: 'testng', version: '6.10'
+    testCompile 'org.uncommons:reportng:1.1.4'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: seleniumVersion
+    compile group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
+    compile group: 'org.json', name: 'json', version: '20171018'
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+}
+
+jar {
+    baseName = 'com.webdriver'
+    version = '1.0.0-SNAPSHOT'
+}
+
+test {
+    useTestNG() {
+        maxParallelForks = 10
+        beforeTest { desc ->
+            println "\n*** Starting execution of test ${desc.className}.${desc.name} ***"
+        }
+        afterTest { descriptor, result ->
+            println "<<< Test ${descriptor.name} resulted in ${result.resultType} and took " + getElaspedTime(result.endTime - result.startTime) + " >>>\n"
+        }
+        testLogging {
+            showStandardStreams = true
+            exceptionFormat "full"
+        }
+    }
+}
+
+task viewResults(dependsOn: ['test'], type: Exec) {
+    workingDir './build/reports/tests'
+    commandLine 'cmd', '/c', 'start index.html'
+}
+
+task wrapper(type: Wrapper) {
+    description = 'Generates gradlew scripts'
+    gradleVersion = '4.3.1'
+}
+
+static def getElaspedTime(def time) {
+
+    if (time / 1000 < 1) {
+        return String.format("0 min, %.3f sec", time / 1000)
+    } else {
+        return String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes(time),
+                TimeUnit.MILLISECONDS.toSeconds(time) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time))
+
+        )
+    }
+}
