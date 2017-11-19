@@ -1,12 +1,14 @@
 package examples;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import java.util.UUID;
 
 import pages.ContactFormPage;
-
-import java.util.UUID;
+import utils.Screenshot;
 
 public class Form extends BaseTest {
 
@@ -21,6 +23,13 @@ public class Form extends BaseTest {
   @BeforeClass
   public void setUp() {
     driver = getDriver();
+  }
+
+  @AfterMethod
+  public void tearDown(ITestResult result) {
+    if (ITestResult.FAILURE == result.getStatus()) {
+      Screenshot.captureScreenshot(driver, result.getName());
+    }
   }
 
   @Test(alwaysRun = true)
