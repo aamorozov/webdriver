@@ -4,12 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import java.util.UUID;
-
 import pages.ContactFormPage;
+import utils.TestListenerWithPdf;
 import utils.Screenshot;
 
+import java.util.UUID;
+
+@Listeners(TestListenerWithPdf.class)
 public class Form extends BaseTest {
 
   private WebDriver driver;

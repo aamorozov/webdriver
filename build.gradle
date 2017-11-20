@@ -22,6 +22,7 @@ test.dependsOn 'cleanTest'
 dependencies {
     testCompile group: 'org.testng', name: 'testng', version: '6.10'
     testCompile 'org.uncommons:reportng:1.1.4'
+    compile group: 'org.testng', name: 'testng', version: '6.10'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: seleniumVersion
@@ -32,6 +33,10 @@ dependencies {
     compile group: 'org.hamcrest', name: 'java-hamcrest', version: '2.0.0.0'
     compile group: 'org.json', name: 'json', version: '20171018'
     compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.0'
+    compile group: 'javax.activation', name: 'javax.activation-api', version: '1.2.0'
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.5.12'
+    compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.0'
 }
 
 jar {

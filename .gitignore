@@ -10,3 +10,10 @@ build
 build
 drivers
 screenshots
+*.pdf*
+resources
+*.properties
+
+src/main/resources/Config.properties
+
+src/main/resources/Config.properties

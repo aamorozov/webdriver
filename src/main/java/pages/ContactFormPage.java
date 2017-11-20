@@ -43,11 +43,13 @@ public class ContactFormPage extends BasePage {
   public void setEmail(String strEmail) {
     emailTextBox.clear();
     emailTextBox.sendKeys(strEmail);
+    Assert.assertEquals(emailTextBox.getAttribute("value"), strEmail);
   }
 
   public void setOrderReference(String strRef) {
     orderReferenceField.clear();
     orderReferenceField.sendKeys(strRef);
+    Assert.assertEquals(orderReferenceField.getAttribute("value"), strRef);
   }
 
   public void selectOptionByIndex(int index) {
@@ -58,6 +60,7 @@ public class ContactFormPage extends BasePage {
   public void setMessage(String strMessage) {
     messageTextarea.clear();
     messageTextarea.sendKeys(strMessage);
+    Assert.assertEquals(messageTextarea.getAttribute("value"), strMessage);
   }
 
   public void uploadFile(String filePath) {
@@ -87,8 +90,8 @@ public class ContactFormPage extends BasePage {
 
   public void assertNoErrors() {
     LogEntries logs = driver.manage().logs().get("browser");
-    for(LogEntry log : logs) {
-      if(log.getLevel().toString().contains("Severe") || log.getMessage().contains("404")) {
+    for (LogEntry log : logs) {
+      if (log.getLevel().toString().contains("Severe") || log.getMessage().contains("404")) {
         throw new Error();
       }
     }
