@@ -12,8 +12,11 @@ drivers
 screenshots
 *.pdf*
 resources
+Config.properties
 *.properties
 
 src/main/resources/Config.properties
+
+*.properties
 
 src/main/resources/Config.properties
