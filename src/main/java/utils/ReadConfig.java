@@ -5,9 +5,8 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class ReadConfig {
-  Properties props;
-
-  public ReadConfig() {
+  private static Properties props;
+    public ReadConfig() {
     try {
       File src = new File(System.getProperty("user.dir") + "/src/main/resources/Config.properties");
       FileInputStream fs = new FileInputStream(src);
