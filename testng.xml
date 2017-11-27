@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" parallel="classes">
-    <parameter name="appURL" value="http://automationpractice.com/index.php?controller=contact"/>
-    <parameter name="browserType" value="chrome"/>
-    <test verbose="2" preserve-order="true" name="webdriver">
+    <listeners>
+        <listener class-name="utils.AnnotationTransformer"/>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="/Users/aam/IdeaProjects/webdriver">
         <classes>
             <class name="examples.Api">
                 <methods>
@@ -23,6 +24,26 @@
             <class name="examples.Links">
                 <methods>
                     <include name="linksTest"/>
+                </methods>
+            </class>
+            <class name="examples.TestRealTimeReporter">
+                <methods>
+                    <include name="testRealReportOne"/>
+                    <include name="testRealReportTwo"/>
+                    <include name="testRealReportThree"/>
+                </methods>
+            </class>
+            <class name="examples.TestWithEmailReport">
+                <methods>
+                    <include name="testPDFReportOne"/>
+                    <include name="testPDFReportTwo"/>
+                    <include name="testPDFReportThree"/>
+                </methods>
+            </class>
+            <class name="examples.TestWithReporter">
+                <methods>
+                    <include name="testReporterOne"/>
+                    <include name="testReporterTwo"/>
                 </methods>
             </class>
         </classes>
